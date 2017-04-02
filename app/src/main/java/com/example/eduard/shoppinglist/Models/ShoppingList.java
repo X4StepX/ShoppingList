@@ -4,15 +4,15 @@ package com.example.eduard.shoppinglist.Models;
  * Created by eduard on 3/29/2017.
  */
 
-public class ShopingList {
+public class ShoppingList {
     public String ListName;
     public String StoreName;
     public String Location;
 
-    public ShopingList() {
+    public ShoppingList() {
     }
 
-    public ShopingList(String listName, String storeName, String location) {
+    public ShoppingList(String listName, String storeName, String location) {
         ListName = listName;
         StoreName = storeName;
         Location = location;

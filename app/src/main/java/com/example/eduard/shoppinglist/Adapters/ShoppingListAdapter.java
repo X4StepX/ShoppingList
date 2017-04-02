@@ -1,15 +1,13 @@
 package com.example.eduard.shoppinglist.Adapters;
 
 import android.content.Context;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
-import com.example.eduard.shoppinglist.Models.ShopingList;
-import com.example.eduard.shoppinglist.Models.ShoppingItem;
+import com.example.eduard.shoppinglist.Models.ShoppingList;
 import com.example.eduard.shoppinglist.R;
 
 import java.util.ArrayList;
@@ -18,16 +16,19 @@ import java.util.ArrayList;
  * Created by eduard on 3/29/2017.
  */
 
-public class ShoppingListAdapter extends ArrayAdapter<ShopingList>{
-    private ArrayList<ShopingList> shopingLists;
+public class ShoppingListAdapter extends ArrayAdapter<ShoppingList>{
+    private ArrayList<ShoppingList> shopingLists;
     Context mContext;
 
     // View lookup cache
     private static class ViewHolder {
+        TextView mShoppingListName;
+        TextView mShoppingListStoreName;
+        TextView mShoppingListLocation;
 
     }
 
-    public ShoppingListAdapter(ArrayList<ShopingList> shopingList, Context context) {
+    public ShoppingListAdapter(ArrayList<ShoppingList> shopingList, Context context) {
         super(context, R.layout.shopping_list_item, shopingList);
         this.shopingLists = shopingList;
         this.mContext=context;
@@ -38,7 +39,7 @@ public class ShoppingListAdapter extends ArrayAdapter<ShopingList>{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        ShopingList shopingList = getItem(position);
+        ShoppingList shopingList = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         ViewHolder viewHolder; // view lookup cache stored in tag
 
@@ -49,7 +50,9 @@ public class ShoppingListAdapter extends ArrayAdapter<ShopingList>{
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.shopping_list_item, parent, false);
-
+            viewHolder.mShoppingListName = (TextView)convertView.findViewById(R.id.ShoppingListName);
+            viewHolder.mShoppingListStoreName = (TextView)convertView.findViewById(R.id.shoppingListStoreName);
+            viewHolder.mShoppingListLocation = (TextView)convertView.findViewById(R.id.shoppingListLocation);
 
             result=convertView;
 
@@ -59,6 +62,9 @@ public class ShoppingListAdapter extends ArrayAdapter<ShopingList>{
             result=convertView;
         }
 
+        viewHolder.mShoppingListName.setText(shopingList.getListName());
+        viewHolder.mShoppingListStoreName.setText(shopingList.getStoreName());
+        viewHolder.mShoppingListLocation.setText(shopingList.getLocation());
 
         // Return the completed view to render on screen
         return convertView;
